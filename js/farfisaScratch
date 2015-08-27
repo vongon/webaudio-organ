@@ -1,0 +1,341 @@
+	var createFlute4 = function(){
+	/**
+     * Create gain/filter flow for Flute4
+     * @return {gainNode} connection point to Flute4
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	}
+
+	var playNoteFlute4 = function(note){
+	/**
+     * Create oscillator and connect to Flute4 node. 
+     * Add oscillator to playingNotes structure.
+     */	
+    var audibleNote = this.map[4][note];
+    console.log('here');
+	}
+
+	var createString8 = function(){
+	/**
+     * Create gain/filter flow for String8
+     * @return {gainNode} connection point to String8
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	};
+
+	var playNoteString8 = function(note){
+	/**
+     * Create oscillator and connect to String8 node. 
+     * Add 2 oscillators to playingNotes structure.
+     */		
+	};
+
+	var createTrumpet8_4 = function(){
+	/**
+     * Create gain/filter flow for Trumpet8 - voice 4
+     * @return {gainNode} connection point to Trumpet8
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	}
+
+	var createTrumpet8_8 = function(){
+	/**
+     * Create gain/filter flow for Trumpet8 - voice 8
+     * @return {gainNode} connection point to Trumpet8
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	}
+
+	var playNoteTrumpet8 = function(note){
+	/**
+     * Create oscillator and connect to Trumpet8 node. 
+     * Add 2 oscillators to playingNotes structure.
+     */		
+	};
+
+	var createOboe8_4 = function(){
+	/**
+     * Create gain/filter flow for Oboe8 - voice 4
+     * @return {gainNode} connection point to Oboe8
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	};
+
+	var createOboe8_8 = function(){
+	/**
+     * Create gain/filter flow for Oboe8 - voice 8
+     * @return {gainNode} connection point to Oboe8
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	};
+
+	var playNoteOboe8 = function(note){
+	/**
+     * Create oscillator and connect to Oboe8 node. 
+     * Add 2 oscillators to playingNotes structure.
+     */		
+	};
+
+	var createFlute8 = function(){
+	/**
+     * Create gain/filter flow for Flute8
+     * @return {gainNode} connection point to Flute8
+     */
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;	
+	};
+
+	var playNoteFlute8 = function(note){
+	/**
+     * Create oscillator and connect to Flute8 node. 
+     * Add oscillator to playingNotes structure.
+     */		
+	};
+
+	var createFlute8 = function(){
+	/**
+     * Create gain/filter flow for Flute8
+     * @return {gainNode} connection point to Flute8
+     */
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;	
+	};
+
+	var playNoteFlute8 = function(note){
+	/**
+     * Create oscillator and connect to Flute8 node. 
+     * Add oscillator to playingNotes structure.
+     */		
+	};
+
+	var createClarinet16 = function(){
+	/**
+     * Create gain/filter flow for Clarinet16
+     * @return {gainNode} connection point to Clarinet16
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	};
+
+	var playNoteClarinet16 = function(note){
+	/**
+     * Create oscillator and connect to Clarinet16 node. 
+     * Add oscillator to playingNotes structure.
+     */		
+	};
+
+	var createBass16 = function(){
+	/**
+     * Create gain/filter flow for Bass16
+     * @return {gainNode} connection point to Bass16
+     */	
+    var inputGain = context.createGain()
+	inputGain.gain.value = 1;
+
+    var filter = context.createBiquadFilter();
+	filter.type = 'lowpass';
+	filter.frequency.value = 1000;
+	filter.Q.value = 1;
+
+	var outputGain = context.createGain()
+	outputGain.gain.value = 1;
+
+
+	inputGain.connect(filter);
+	filter.connect(outputGain);
+	outputGain.connect(context.destination);
+
+    return inputGain;
+	};
+
+	var playNoteBass16 = function(note){
+	/**
+     * Create oscillator and connect to Bass16 node. 
+     * Add oscillator to playingNotes structure.
+     */	
+     console.log('playNoteBass16');	
+	};
+
+	var stopNote = function(note, frequency){
+	/**
+     * Stop note function
+     */
+		var oscillator = playingNotes[note];
+		if(!oscillator){
+			throw "farfisa.stop() called on a note that isn't playing!";
+		}
+		oscillator.stop(0);
+		oscillator.disconnect();
+		delete playingNotes[note];
+
+	};
+
+	this.voiceNodes = {	'flute4' 	: createFlute4(),
+						'string8' 	: createString8(),
+						'trumpet8_4': createTrumpet8_4(),
+						'trumpet8_8': createTrumpet8_8(), 
+						'oboe8_4'	: createOboe8_4(),
+						'oboe8_8'	: createOboe8_8(),
+						'flute8'	: createFlute8(),
+						'clarinet16': createClarinet16(),
+						'bass16'	: createBass16() };
+
+	this.playingNotes = createPlayingNotesStructure();
+	this.keyboard = new QwertyHancock({
+                 id: 'keyboard',
+                 width: 600,
+                 height: 150,
+                 octaves: 3,
+                 startNote: 'A3',
+                 whiteNotesColour: 'white',
+                 blackNotesColour: 'black',
+                 hoverColour: '#f3e939'
+            	});
+
+	this.keyboard.keyDown = function (note, frequency) {
+    	farf.playNoteFlute4(note);
+	};
+	this.keyboard.keyUp = function (note, frequency) {
+    	stopNote(note, frequency);
+	};
