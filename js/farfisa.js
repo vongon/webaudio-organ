@@ -105,6 +105,7 @@ function farfisa(audioContext){
      * @param {rocker} rocker to play
      */	
     	var voices = this.rockers[rocker];
+    	var vibrato = this.vibrato.gainNode;
     	
      	for(var voice in voices){
      		var key = {};
@@ -114,6 +115,7 @@ function farfisa(audioContext){
 
      		oscillator.frequency.value = this.playingNotes[audibleNote].frequency;
      		oscillator.type = this.rockers[rocker][voice]["waveform"];
+     		vibrato.connect(oscillator.frequency);
      		
      		oscillator.connect(gainNode);
      		gainNode.connect(this.rockers[rocker][voice]["node"]);
@@ -132,7 +134,7 @@ function farfisa(audioContext){
      * Interface for farfisa to start playing a note. 
      * Plays notes through all rockers included in 'voiceNodes' structure
      */	
-		//this.playNote(note, "flute4");
+		this.playNote(note, "flute4");
 		//this.playNote(note, "bass");
 		//this.playNote(note, "oboe");
 		//this.playNote(note, "trumpet");
@@ -145,7 +147,7 @@ function farfisa(audioContext){
      */	
     	var keys = this.playingNotes[note].oscillators,
 			key, i, now;
-		var releaseTime = 0.1;
+		var releaseTime = 1.1;
 		for(i=0; keys.length; i++){
 			now = this.context.currentTime;
 			key = keys.pop();
@@ -172,5 +174,20 @@ farfisa.prototype.initialize = function(){
 			voice.node = this.createVoice(voice);
 		}
 	}
+	this.vibrato = this.createVibrato();
 };
+farfisa.prototype.createVibrato = function(){
+	var lfo = this.context.createOscillator();
+	var gainNode = this.context.createGain();
+
+	lfo.frequency.value = 5;
+	lfo.type = 'triangle';
+	lfo.start(0);
+
+	gainNode.gain.value = 2.0;
+
+	lfo.connect(gainNode);
+	return {lfo, gainNode};
+
+}
 
