@@ -24,14 +24,13 @@ function weborgan(){
 			return new contextClass();
 		} else {
 			//Web Audio API is not available.
-			alert('Web Audio API does not seem to be available in this browser, please try a more recent version of Chrome or Safari.');
+			alert('Web Audio API does not seem to be available in this browser,'
+			 + 'please try a more recent version of Chrome or Safari.');
 		}
 	}
 
 	var context = declareContext();
 	var farf = new farfisa(context);
-	//farf.voiceNodes = { 'flute4' : farf.createFlute4()};
-	farf.initialize();
 	var keyboard = new QwertyHancock({
 				                 id: 'keyboard',
 				                 width: 600,
@@ -51,4 +50,3 @@ function weborgan(){
 }
 
 var organ = new weborgan();
-

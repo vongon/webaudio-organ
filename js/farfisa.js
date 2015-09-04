@@ -17,6 +17,13 @@ function farfisa(audioContext){
  */
 	this.context = audioContext;
 	this.rockers = rockers_structure;
+	this.activeRockers = [	"flute4",
+							"string",
+							"trumpet",
+							"oboe",
+							"flute8",
+							"clarinet",
+							"bass"	];
 
 
     var getFrequencyOfNote = function (note) {
@@ -57,11 +64,13 @@ function farfisa(audioContext){
 				for (var letter = 0; letter < notes.length; letter++){
 					var note = notes[letter] + String(num);
 					var freq = getFrequencyOfNote(note);
-					playingNotes[note] = {	'frequency':freq,
-											'oscillators':[],
-											4: note_maps[4][note],
-											8: note_maps[8][note],
-											16: note_maps[16][note]};
+					playingNotes[note] = {	
+									'frequency':freq,
+									'oscillators':[],
+									4: note_maps[4][note],
+									8: note_maps[8][note],
+									16: note_maps[16][note]
+								};
 				}
 			}
 		return playingNotes;
@@ -96,15 +105,24 @@ function farfisa(audioContext){
      * @param {rocker} rocker to play
      */	
     	var voices = this.rockers[rocker];
+    	
      	for(var voice in voices){
+     		var key = {};
      		var audibleNote = this.playingNotes[note][voice];
      		var oscillator = this.context.createOscillator();
+     		var gainNode = this.context.createGain();
+
      		oscillator.frequency.value = this.playingNotes[audibleNote].frequency;
      		oscillator.type = this.rockers[rocker][voice]["waveform"];
-     		oscillator.connect(this.rockers[rocker][voice]["node"]);
+     		
+     		oscillator.connect(gainNode);
+     		gainNode.connect(this.rockers[rocker][voice]["node"]);
 
      		oscillator.start(0);
-     		this.playingNotes[note]["oscillators"].push(oscillator);
+     		key.oscillator = oscillator;
+     		key.gainNode = gainNode;
+     		key.voiceName = rocker + ':' + voice;
+     		this.playingNotes[note]["oscillators"].push(key);
      	}
 	}
 
@@ -114,25 +132,45 @@ function farfisa(audioContext){
      * Interface for farfisa to start playing a note. 
      * Plays notes through all rockers included in 'voiceNodes' structure
      */	
-		this.playNote(note, "flute4");
-		this.playNote(note, "bass");
+		//this.playNote(note, "flute4");
+		//this.playNote(note, "bass");
+		//this.playNote(note, "oboe");
+		//this.playNote(note, "trumpet");
+		this.playNote(note, "clarinet");
 	}
+
 	this.keyUp = function(note){
 	/**
      * Interface for farfisa to stop playing all oscillators for note. 
      */	
-		var oscillators = this.playingNotes[note].oscillators;
-		for(var i = 0; i <= oscillators.length; i++){
-			var oscillator = oscillators.pop();
-			oscillator.stop();
-			oscillator.disconnect();
+    	var keys = this.playingNotes[note].oscillators,
+			key, i, now;
+		var releaseTime = 0.1;
+		for(i=0; keys.length; i++){
+			now = this.context.currentTime;
+			key = keys.pop();
+			key.oscillator.stop(now + releaseTime);
+
+			//create fade out event to avoid key click
+			key.gainNode.gain.setValueAtTime(key.gainNode.gain.value, now);
+			key.gainNode.gain.exponentialRampToValueAtTime(0.01, now + releaseTime);
+			
+			key.oscillator.onended = function(){
+			key.oscillator.disconnect();
+			key.gainNode.disconnect();
+			};
 		}
 	}
+	this.initialize();
 };
 farfisa.prototype.initialize = function(){
-		var voice = this.rockers["flute4"]["4"];
-		voice.node = this.createVoice(voice);
-		voice = this.rockers["bass"]["16"];
-		voice.node = this.createVoice(voice);
+	var rocker, octave, voice;
+
+	for(rocker in this.rockers){
+		for(octave in this.rockers[rocker]){
+			voice = this.rockers[rocker][octave];
+			voice.node = this.createVoice(voice);
+		}
+	}
 };
 

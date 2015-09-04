@@ -9,7 +9,7 @@ rockers_structure = {
 			      	"frequency": 1000,
 			      	"Q": 1
 			      	},
-			      "gain" : 0.4
+			      "gain" : 1.0
 			    }
 			  },
 			  "string": {
@@ -20,7 +20,8 @@ rockers_structure = {
 			      	"type":"lowpass",
 			      	"frequency": 10000,
 			      	"Q": 1
-			      	}
+			      	},
+			      "gain" : 1.0
 			    },
 			    "8": {
 			      "node": {},
@@ -42,7 +43,7 @@ rockers_structure = {
 			      	"frequency": 5000,
 			      	"Q": 1
 			      	},
-			      "gain" : 1
+			      "gain" : 0.5
 			    },
 			    "8": {
 			      "node": {},
