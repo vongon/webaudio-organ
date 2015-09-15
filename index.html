@@ -1,16 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" type="text/css" href="css/weborgan.css" />		
 	</head>
 
 	<body>
- 	<p> Web Audio! </p>
- 	<div id='keyboard'> </div>
+ 	<div id='weborgan'>
+ 		<p id="click"> Web Audio! </p>
+		<svg version="1.1" id="svgfarfisa" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="0 0 530 300" style="enable-background:new 0 0 516 291;" xml:space="preserve">
+					<style type="text/css">
+						.st0{fill:#FFFEF9;stroke:#010101;stroke-miterlimit:10;}
+						.st1{fill:#BFBFBA;stroke:#010101;stroke-miterlimit:10;}
+						.st2{fill:none;stroke:#010101;stroke-miterlimit:10;}
+						.st3{fill:#D1D2CF;stroke:#010101;stroke-miterlimit:10;}
+						.st4{fill:#434A40;stroke:#010101;stroke-miterlimit:10;}
+						.st5{fill:#B12024;stroke:#010101;stroke-miterlimit:10;}
+						.st6{fill:#585C88;stroke:#010101;stroke-miterlimit:10;}
+						.st7{fill:#A1A49F;stroke:#010101;stroke-miterlimit:10;}
+						.st8{fill:#60B383;stroke:#010101;stroke-miterlimit:10;}
+						.st9{fill:#676767;stroke:#B3B3B3;stroke-miterlimit:10;}
+						.st10{fill:#4E4E4E;stroke:#333333;stroke-miterlimit:10;}
+						.st11{fill:#676767;stroke:#676767;stroke-width:0.5;stroke-miterlimit:10;}
+						.st12{fill:#FFFFFF;stroke:#676767;stroke-width:0.5;stroke-miterlimit:10;}
+					</style>
+					<g id="rockers">
+						<rect x="8.5" y="7.5" class="st0" width="500" height="278"/>
+						<rect x="31.5" y="174.5" class="st1" width="456" height="105"/>
+						<rect x="8.5" y="7.5" class="st2" width="500" height="163"/>
+						<rect x="112.5" y="95.5" class="st0" width="300" height="75"/>
+						<circle class="st3" cx="380.3" cy="135.3" r="9.7"/>
+						<circle class="st4" cx="135.3" cy="135.3" r="9.7"/>
+						<path class="st5" d="M159.5,141c0,1.9-1.6,3.5-3.5,3.5l0,0c-1.9,0-3.5-1.6-3.5-3.5v-12c0-1.9,1.6-3.5,3.5-3.5l0,0
+							c1.9,0,3.5,1.6,3.5,3.5V141z"/>
+
+						<rect id="vibrato" x="172.5" y="114.5" class="st6" width="20" height="42"/>
+						<rect id="vibrato_speed" x="195.5" y="114.5" class="st6" width="20" height="42"/>
+					<g id="voices">
+						<rect id="bass" x="240.5" y="114.5" class="st7" width="20" height="42"/>
+						<rect id="clarinet" x="263.5" y="114.5" class="st7" width="20" height="42"/>
+						<rect id="flute8" x="286.5" y="114.5" class="st7" width="20" height="42"/>
+						<rect id="trumpet" x="309.5" y="114.5" class="st7" width="20" height="42"/>
+						<rect id="flute4" x="332.5" y="114.5" class="st7" width="20" height="42"/>
+					</g>
+						<rect x="0.5" y="0.5" class="st8" width="8" height="291"/>
+						<rect x="508.5" y="0.5" class="st8" width="8" height="291"/>
+						<polygon class="st8" points="110.5,91.5 110.5,172.5 114.5,172.5 114.5,95.5 411.5,95.5 411.5,172.5 415.5,172.5 415.5,91.5 	"/>
+						<g>
+							<circle class="st9" cx="112.2" cy="75.6" r="4.6"/>
+							<circle class="st10" cx="112.2" cy="75.6" r="1.7"/>
+						</g>
+						<g>
+							<rect x="441" y="16.3" class="st11" width="17" height="18.6"/>
+							<g id="D3yBnp.tif">
+								<g>
+									<path class="st12" d="M446.6,15.9 M459.1,16.3c-0.1,0-0.1,0-0.2,0c-1.5,0-3,0-4.6,0c-0.2,0-0.3,0.1-0.3,0.3c0,0.5,0,1.1,0,1.6
+										c0,0.9,0,1.8,0,2.8c0,0.2-0.1,0.4-0.3,0.4c-0.8,0-1.7,0-2.5,0c-1.4,0-2.9,0-4.3,0c-0.2,0-0.3,0.1-0.3,0.3c0,1.1,0,2.1,0,3.2
+										c0,0.5,0,0.5,0.5,0.5c2.2,0,4.4,0,6.5,0c0.3,0,0.4,0.1,0.4,0.4c0,1.6,0,3.2,0,4.7c0,0.3-0.1,0.4-0.4,0.4c-2.2,0-4.5,0-6.7,0
+										c-0.3,0-0.4,0.1-0.4,0.4c0,1.1,0,2.2,0,3.3c0,0.3,0.1,0.4,0.4,0.4c3.9,0,7.7,0,11.6,0c0.5,0,0.6,0,0.6-0.5c0-0.7,0-1.5,0-2.2
+										c0-2.6,0-5.2,0-7.7c0-2.1,0-4.3,0-6.4C459.1,17.4,459.1,16.9,459.1,16.3z M446.6,16.3C446.6,16.3,446.6,16.3,446.6,16.3
+										c-0.3,0-0.6,0-1,0c-1.5,0-3,0-4.6,0c-0.3,0-0.4,0.1-0.4,0.4c0,2.3,0,4.7,0,7c0,0.7,0,1.5,0,2.2c0,0.6,0,1.3,0,1.9c0,1,0,2,0,3
+										c0,1.2,0,2.5,0,3.7c0,0.2,0.1,0.3,0.3,0.3c1.2,0,2.3,0,3.5,0c0.5,0,0.5,0,0.5-0.5c0-1.3,0-2.7,0-4c0-0.3,0.1-0.4,0.4-0.4
+										c0.4,0,0.9,0,1.3,0c1.7,0,3.5,0,5.2,0c0.3,0,0.4-0.1,0.4-0.4c0-1.1,0-2.2,0-3.3c0-0.3-0.1-0.4-0.4-0.4c-1.6,0-3.3,0-4.9,0
+										c-0.6,0-1.1,0-1.7,0c-0.3,0-0.4-0.1-0.4-0.4c0-1.6,0-3.1,0-4.7c0-0.4,0.1-0.4,0.5-0.4c2.2,0,4.3,0,6.5,0c0.3,0,0.4-0.1,0.4-0.4
+										c0-0.9,0-1.8,0-2.7c0-0.3,0.1-0.8-0.1-1c-0.2-0.2-0.7-0.1-1-0.1C449.7,16.3,448.2,16.3,446.6,16.3z"/>
+									<path class="st12" d="M459.1,16.3c0,0.6,0,1.1,0,1.6c0,2.1,0,4.3,0,6.4c0,2.6,0,5.2,0,7.7c0,0.7,0,1.5,0,2.2
+										c0,0.5,0,0.5-0.6,0.5c-3.9,0-7.7,0-11.6,0c-0.3,0-0.4-0.1-0.4-0.4c0-1.1,0-2.2,0-3.3c0-0.3,0.1-0.4,0.4-0.4c2.2,0,4.5,0,6.7,0
+										c0.3,0,0.4-0.1,0.4-0.4c0-1.6,0-3.2,0-4.7c0-0.3-0.1-0.4-0.4-0.4c-2.2,0-4.4,0-6.5,0c-0.5,0-0.5,0-0.5-0.5c0-1.1,0-2.1,0-3.2
+										c0-0.2,0.1-0.3,0.3-0.3c1.4,0,2.9,0,4.3,0c0.8,0,1.7,0,2.5,0c0.3,0,0.3-0.1,0.3-0.4c0-0.9,0-1.8,0-2.8c0-0.5,0-1.1,0-1.6
+										c0-0.2,0.1-0.3,0.3-0.3c1.5,0,3,0,4.6,0C458.9,16.3,459,16.3,459.1,16.3z"/>
+									<path class="st12" d="M446.6,16.3c1.6,0,3.2,0,4.8,0c0.3,0,0.8-0.1,1,0.1c0.2,0.2,0.1,0.6,0.1,1c0,0.9,0,1.8,0,2.7
+										c0,0.3-0.1,0.4-0.4,0.4c-2.2,0-4.3,0-6.5,0c-0.3,0-0.5,0.1-0.5,0.4c0,1.6,0,3.1,0,4.7c0,0.3,0.1,0.4,0.4,0.4c0.6,0,1.1,0,1.7,0
+										c1.6,0,3.3,0,4.9,0c0.3,0,0.4,0.1,0.4,0.4c0,1.1,0,2.2,0,3.3c0,0.3-0.1,0.4-0.4,0.4c-1.7,0-3.5,0-5.2,0c-0.4,0-0.9,0-1.3,0
+										c-0.3,0-0.4,0.1-0.4,0.4c0,1.3,0,2.7,0,4c0,0.5,0,0.5-0.5,0.5c-1.2,0-2.3,0-3.5,0c-0.2,0-0.3-0.1-0.3-0.3c0-1.2,0-2.5,0-3.7
+										c0-1,0-2,0-3c0-0.6,0-1.3,0-1.9c0-0.7,0-1.5,0-2.2c0-2.3,0-4.7,0-7c0-0.3,0.1-0.4,0.4-0.4c1.5,0,3,0,4.6,0
+										C445.9,16.3,446.2,16.3,446.6,16.3C446.6,16.3,446.6,16.3,446.6,16.3z"/>
+								</g>
+							</g>
+						</g>
+						<g>
+							<circle class="st9" cx="412.2" cy="75.6" r="4.6"/>
+							<circle class="st10" cx="412.2" cy="75.6" r="1.7"/>
+						</g>
+						<g>
+							<circle class="st9" cx="498.2" cy="178.6" r="2.1"/>
+							<circle class="st10" cx="498.2" cy="178.6" r="0.8"/>
+						</g>
+						<g>
+							<circle class="st9" cx="499.2" cy="274.6" r="2.1"/>
+							<circle class="st10" cx="499.2" cy="274.6" r="0.8"/>
+						</g>
+						<g>
+							<circle class="st9" cx="17.2" cy="177.6" r="2.1"/>
+							<circle class="st10" cx="17.2" cy="177.6" r="0.8"/>
+						</g>
+						<g>
+							<circle class="st9" cx="18.2" cy="273.6" r="2.1"/>
+							<circle class="st10" cx="18.2" cy="273.6" r="0.8"/>
+						</g>
+					</g>
+		</svg>
+
+	 	<div id='keys'>
+	 		<div id='keyboard'></div>
+	 	</div>
+	</div>
 		
 		<!-- Java Script Files -->
+		<script src = 'js/jquery-2.1.4.js'></script>
+		<script src = 'js/snap/snap.svg.js'></script>
 		<script src = 'js/qwerty-hancock.js'></script>
 		<script src = 'js/structures.js'></script>
 		<script src = 'js/farfisa.js'></script>
 		<script src = 'js/weborgan.js'></script>
+		<!--<script src = 'js/events.js'></script>-->
 	</body>
 </html>

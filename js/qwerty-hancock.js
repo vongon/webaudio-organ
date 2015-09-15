@@ -64,9 +64,9 @@
             width:          user_settings.width,
             height:         user_settings.height,
             startNote:      user_settings.startNote || 'A3',
-            whiteKeyColour: user_settings.whiteKeyColour || '#fff',
-            blackKeyColour: user_settings.blackKeyColour || '#000',
-            activeColour:   user_settings.activeColour || 'yellow',
+            whiteKeyColour: user_settings.whiteKeyColour || '#BFBFBA',
+            blackKeyColour: user_settings.blackKeyColour || '#FFFEF9',
+            activeColour:   user_settings.activeColour || '#808282',
             borderColour:   user_settings.borderColour || '#000',
             keyboardLayout: user_settings.keyboardLayout || 'en'
         };
