@@ -9,7 +9,6 @@
  */
 "use strict";
 function weborgan(){
-
 	function declareContext(){
 		/*
 		 * Delcares the audio context for all browsers known to support WebAudio API
@@ -33,8 +32,8 @@ function weborgan(){
 	var farf = new farfisa(context);
 	var keyboard = new QwertyHancock({
 				                 id: 'keyboard',
-				                 width: 690,
-				                 height: 158,
+				                 width: 695,
+				                 height: 162,
 				                 octaves: 4,
 				                 startNote: 'A2',
 				                 whiteNotesColour: '',
@@ -48,43 +47,63 @@ function weborgan(){
 	    farf.keyUp(note);
 	}
 
-	var s = Snap("#svgfarfisa");
-	var vibrato = s.select("#vibrato");
-	vibrato.click(function(){
-		if(farf.vibrato.on){
-			//turning vibrato on
-			console.log('turn off vibrato');
-			farf.deactivateVibrato();
-		}else{
-			//turning vibrato off
-			console.log('turn on vibrato');
-			farf.activateVibrato();
-		}
-	});
-	var vibrato_speed = s.select("#vibrato_speed");
-	vibrato_speed.click(function(){
-		if(farf.vibrato.speed == "fast"){
-			console.log("make vibrato slow");
-			farf.slowVibrato();
-		}else{
-			console.log("make vibrato fast");
-			farf.fastVibrato();
-		}
-	});
-	var voices = s.selectAll("#voices > rect");
-	voices.forEach(function(element){
-		element.click(function(){
-			var rocker = this.node.id;
-			if(farf.activeRockers.indexOf(rocker) > -1){
-				//rocker is active
-				console.log("deactivating " + rocker);
-				farf.deactivateRocker(rocker);
+	var s = Snap("#farfisa");
+	var vibrato = s.selectAll(".vibrato").forEach(function(element){
+			element.click(function(){
+			var toggle = true;
+			if(farf.vibrato.on){
+				console.log('turn off vibrato');
+				farf.deactivateVibrato();
+				toggle = false;
 			}else{
-				//rocker is deactive
-				console.log("activating " + rocker);
-				farf.activateRocker(rocker);
+				console.log('turn on vibrato');
+				farf.activateVibrato();
 			}
+			vibrato[0].toggleClass("hide", toggle);
+			vibrato[1].toggleClass("hide", !toggle);
 		});
+	});
+	
+	var speed = s.selectAll(".speed").forEach(function(element){
+			element.click(function(){
+			var toggle = true;
+			if(farf.vibrato.speed == "fast"){
+				console.log("make vibrato slow");
+				farf.slowVibrato();
+			}else{
+				console.log("make vibrato fast");
+				farf.fastVibrato();
+				toggle = false;
+			}
+			speed[0].toggleClass("hide", toggle);
+			speed[1].toggleClass("hide", !toggle);
+		});
+	});
+
+	var voices = s.selectAll("#voices > g");
+	voices.forEach(function(voice){
+		console.log("looped");
+		var rocker = voice.node.id;
+		var state = voice.selectAll("g");
+		state.forEach(function(element){
+			var toggle = true;
+			element.click(function(){
+				if(farf.activeRockers.indexOf(rocker) > -1){
+					//rocker is active
+					console.log("deactivating " + rocker);
+					farf.deactivateRocker(rocker);
+					toggle = false;
+				}else{
+					//rocker is deactive
+					console.log("activating " + rocker);
+					farf.activateRocker(rocker);
+				}
+				state[0].toggleClass("hide", toggle);
+				state[1].toggleClass("hide", !toggle);
+			});
+		});
+
+			
 	});
 
 }
