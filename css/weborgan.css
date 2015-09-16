@@ -1,20 +1,22 @@
 
 #weborgan{
+	position: absolute;
 	width: 800px;
-	margin-left: auto;
-	margin-right: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+
 }
 
 #farfisa {
 	width: 800px;
+
 }
 
 #keys {
-	width: 715px;
 	position: absolute;
-	left: auto;
-	margin-left: 64px;
-    top: 325px;
+	top:275px;
+	left: 60px;
 }
 
 .st11:hover{

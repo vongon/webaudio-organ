@@ -231,6 +231,7 @@
             el.style.margin = 0;
             el.style.width = settings.width + 'px';
             el.style['-webkit-user-select'] = 'none';
+            el.className = 'list-unstyled';
         };
 
         styleElement(keyboard.container);
@@ -367,7 +368,6 @@
             whiteNotes: orderNotes(['C', 'D', 'E', 'F', 'G', 'A', 'B']),
             notesWithSharps: orderNotes(['C', 'D', 'F', 'G', 'A']),
         };
-
         keyboard.keys = createKeys.call(keyboard);
 
         setKeyPressOffset(keyboard.whiteNotes);

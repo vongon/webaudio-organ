@@ -1069,7 +1069,7 @@ th {
 .glyphicon-menu-up:before {
   content: "\e260";
 }
-* {
+/** {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
@@ -1078,7 +1078,7 @@ th {
 *:after {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
-          box-sizing: border-box;
+          box-sizing: border-box;*/
 }
 html {
   font-size: 10px;
