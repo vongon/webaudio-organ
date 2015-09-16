@@ -1,0 +1,32 @@
+
+#weborgan{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#farfisa {
+	width: 800px;
+}
+
+#keys {
+	width: 715px;
+	position: absolute;
+	left: auto;
+	margin-left: 64px;
+    top: 325px;
+}
+
+.st11:hover{
+	fill:#D1E9D1
+}
+
+.st12:hover{
+	fill:#AEABC2
+}
+
+.hide{
+	visibility: hidden;
+}
+
+
