@@ -17,10 +17,9 @@ function farfisa(audioContext){
  */
 	this.context = audioContext;
 	this.rockers = rockers_structure;
-	this.activeRockers = [	"flute4",
-							"clarinet"];
+	this.activeRockers = ["clarinet","flute4"];
 	this.vibratoAmt = 25.0;
-	this.vibratoFast = 8.0;
+	this.vibratoFast = 7.0;
 	this.vibratoSlow = 4.0;
 
 
@@ -58,7 +57,7 @@ function farfisa(audioContext){
      */
 		var playingNotes = {}
 		var notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
-			for (var num = 0; num<=5; num++){
+			for (var num = 0; num<=6; num++){
 				for (var letter = 0; letter < notes.length; letter++){
 					var note = notes[letter] + String(num);
 					var freq = getFrequencyOfNote(note);
@@ -76,7 +75,7 @@ function farfisa(audioContext){
 
 	this.playingNotes = createPlayingNotesStructure();
 
-	this.createVoice = function(voice){
+	this.createVoice = function(voice, output){
 	/**
      * Create gain/filter flow for {voice}
      * @param {voice} voice object containing properties for gain/filter flow
@@ -91,7 +90,7 @@ function farfisa(audioContext){
 		outputGain.gain.value = voice.gain;
 
 		filter.connect(outputGain);
-		outputGain.connect(this.context.destination);
+		outputGain.connect(output);
 
 	    return filter;
 	};
@@ -106,23 +105,25 @@ function farfisa(audioContext){
     	var vibrato = this.vibrato.gainNode;
     	
      	for(var voice in voices){
-     		var key = {};
-     		var audibleNote = this.playingNotes[note][voice];
-     		var oscillator = this.context.createOscillator();
-     		var gainNode = this.context.createGain();
+     		if(voice != "output"){
+	     		var key = {};
+	     		var audibleNote = this.playingNotes[note][voice];
+	     		var oscillator = this.context.createOscillator();
+	     		var gainNode = this.context.createGain();
 
-     		oscillator.frequency.value = this.playingNotes[audibleNote].frequency;
-     		oscillator.type = this.rockers[rocker][voice]["waveform"];
-     		vibrato.connect(oscillator.detune);
-     		
-     		oscillator.connect(gainNode);
-     		gainNode.connect(this.rockers[rocker][voice]["node"]);
+	     		oscillator.frequency.value = this.playingNotes[audibleNote].frequency;
+	     		oscillator.type = this.rockers[rocker][voice]["waveform"];
+	     		vibrato.connect(oscillator.detune);
+	     		
+	     		oscillator.connect(gainNode);
+	     		gainNode.connect(this.rockers[rocker][voice]["node"]);
 
-     		oscillator.start(0);
-     		key.oscillator = oscillator;
-     		key.gainNode = gainNode;
-     		key.voiceName = rocker + ':' + voice;
-     		this.playingNotes[note]["oscillators"].push(key);
+	     		oscillator.start(0);
+	     		key.oscillator = oscillator;
+	     		key.gainNode = gainNode;
+	     		key.voiceName = rocker + ':' + voice;
+	     		this.playingNotes[note]["oscillators"].push(key);
+     		}
      	}
 	}
 
@@ -132,10 +133,11 @@ function farfisa(audioContext){
      * Interface for farfisa to start playing a note. 
      * Plays notes through all rockers included in 'activeRockers' structure
      */	
-     	var i;
-		for(i in this.activeRockers){
-			this.playNote(note, this.activeRockers[i]);
-		}
+		this.playNote(note, "bass");
+		this.playNote(note, "clarinet");
+		this.playNote(note, "flute4");
+		this.playNote(note, "trumpet");
+		this.playNote(note, "flute8");
 	}
 
 	this.keyUp = function(note){
@@ -166,12 +168,22 @@ farfisa.prototype.initialize = function(){
 	/**
 	 * Initialize voice nodes for organ, automatically called by constructor
 	 */
-	var rocker, octave, voice;
+	var rocker, octave, voice, obj;
 
 	for(rocker in this.rockers){
+		obj = this.rockers[rocker];
+		obj.output = this.context.createGain();
+		obj.output.connect(this.context.destination);
+
+		if(this.activeRockers.indexOf(rocker)<0){
+			obj.output.gain.value = 0.00;
+		}
+
 		for(octave in this.rockers[rocker]){
-			voice = this.rockers[rocker][octave];
-			voice.node = this.createVoice(voice);
+			if(octave != "output"){
+				voice = this.rockers[rocker][octave];
+				voice.node = this.createVoice(voice, obj.output);
+			}
 		}
 	}
 	this.vibrato = this.createVibrato();
@@ -229,6 +241,7 @@ farfisa.prototype.activateRocker = function(rocker){
 	 * activates voice specified by @rocker, called by voice rocker
 	 */
 	this.activeRockers.push(rocker);
+	this.rockers[rocker].output.gain.value = 1.00;
 };
 farfisa.prototype.deactivateRocker = function(rocker){
 	/*
@@ -239,6 +252,7 @@ farfisa.prototype.deactivateRocker = function(rocker){
 		throw "error in deactivateRocker, couldn't find " + rocker;
 	};
 	this.activeRockers.splice(index,1);
+	this.rockers[rocker].output.gain.value = 0.00;
 };
 
 
