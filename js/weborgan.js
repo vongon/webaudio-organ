@@ -82,7 +82,6 @@ function weborgan(){
 
 	var voices = s.selectAll("#voices > g");
 	voices.forEach(function(voice){
-		console.log("looped");
 		var rocker = voice.node.id;
 		var state = voice.selectAll("g");
 		state.forEach(function(element){
