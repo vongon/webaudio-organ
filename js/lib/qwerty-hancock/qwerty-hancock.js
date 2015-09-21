@@ -383,8 +383,8 @@
 
     var getKeyPressed = function (keyCode) {
         return key_map[keyCode]
-                .replace('l', parseInt(settings.startOctave, 10) + settings.keyPressOffset)
-                .replace('u', (parseInt(settings.startOctave, 10) + settings.keyPressOffset + 1)
+                .replace('l', parseInt(settings.startOctave, 10) + settings.keyPressOffset + 1)
+                .replace('u', (parseInt(settings.startOctave, 10) + settings.keyPressOffset + 2)
                 .toString());
     };
 

@@ -18,9 +18,11 @@ function farfisa(audioContext){
 	this.context = audioContext;
 	this.rockers = rockers_structure;
 	this.activeRockers = ["clarinet","flute4"];
-	this.vibratoAmt = 25.0;
+	this.outputGain = {};
+	this.vibratoAmt = 30.0;
 	this.vibratoFast = 7.0;
-	this.vibratoSlow = 4.0;
+	this.vibratoSlow = 5.0;
+	this.outputGainLevel = 0.25;
 
 
     var getFrequencyOfNote = function (note) {
@@ -57,7 +59,7 @@ function farfisa(audioContext){
      */
 		var playingNotes = {}
 		var notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
-			for (var num = 0; num<=6; num++){
+			for (var num = 0; num<=7; num++){
 				for (var letter = 0; letter < notes.length; letter++){
 					var note = notes[letter] + String(num);
 					var freq = getFrequencyOfNote(note);
@@ -170,10 +172,14 @@ farfisa.prototype.initialize = function(){
 	 */
 	var rocker, octave, voice, obj;
 
+	this.outputGain = this.context.createGain();
+	this.outputGain.connect(this.context.destination);
+	this.outputGain.value = this.outputGainLevel;
+
 	for(rocker in this.rockers){
 		obj = this.rockers[rocker];
 		obj.output = this.context.createGain();
-		obj.output.connect(this.context.destination);
+		obj.output.connect(this.outputGain);
 
 		if(this.activeRockers.indexOf(rocker)<0){
 			obj.output.gain.value = 0.00;
@@ -194,7 +200,7 @@ farfisa.prototype.createVibrato = function(){
 	 */
 	var lfo = this.context.createOscillator();
 	var gainNode = this.context.createGain();
-	var on = true;
+	var enabled = true;
 	var speed = "fast";
 
 	lfo.frequency.value = this.vibratoFast;
@@ -204,21 +210,21 @@ farfisa.prototype.createVibrato = function(){
 	gainNode.gain.value = this.vibratoAmt;
 
 	lfo.connect(gainNode);
-	return {lfo, gainNode, on, speed};
+	return {"lfo":lfo, "gainNode":gainNode, "enabled":enabled, "speed":speed};
 };
 farfisa.prototype.activateVibrato = function(){
 	/*
 	 * activates vibrato, called by vibrato rocker
 	 */
 	this.vibrato.gainNode.gain.value = this.vibratoAmt;
-	this.vibrato.on = true;
+	this.vibrato.enabled = true;
 };
 farfisa.prototype.deactivateVibrato = function(){
 	/*
 	 * deactivates vibrato, called by vibrato rocker
 	 */
 	this.vibrato.gainNode.gain.value = 0;
-	this.vibrato.on = false;
+	this.vibrato.enabled = false;
 };
 farfisa.prototype.slowVibrato = function(){
 	/*

@@ -9,6 +9,7 @@
  */
 "use strict";
 function weborgan(){
+	this.checkBrowser();
 	function declareContext(){
 		/*
 		 * Delcares the audio context for all browsers known to support WebAudio API
@@ -41,22 +42,24 @@ function weborgan(){
 				                 hoverColour: ''
 				            	});
 	keyboard.keyDown = function (note, frequency) {
-	    farf.keyDown(note);
+	    if(note != ""){ //error in keyboard DIV that calls this method with no note value
+	    	farf.keyDown(note);
+	    }
 	}
 	keyboard.keyUp = function (note, frequency) {
-	    farf.keyUp(note);
+	    if(note != ""){
+	    	farf.keyUp(note);
+	    }
 	}
 
 	var s = Snap("#farfisa");
 	var vibrato = s.selectAll(".vibrato").forEach(function(element){
 			element.click(function(){
 			var toggle = true;
-			if(farf.vibrato.on){
-				console.log('turn off vibrato');
+			if(farf.vibrato.enabled){
 				farf.deactivateVibrato();
 				toggle = false;
 			}else{
-				console.log('turn on vibrato');
 				farf.activateVibrato();
 			}
 			vibrato[0].toggleClass("hide", toggle);
@@ -68,10 +71,8 @@ function weborgan(){
 			element.click(function(){
 			var toggle = true;
 			if(farf.vibrato.speed == "fast"){
-				console.log("make vibrato slow");
 				farf.slowVibrato();
 			}else{
-				console.log("make vibrato fast");
 				farf.fastVibrato();
 				toggle = false;
 			}
@@ -82,7 +83,6 @@ function weborgan(){
 
 	var voices = s.selectAll("#voices > g");
 	voices.forEach(function(voice){
-		console.log("looped");
 		var rocker = voice.node.id;
 		var state = voice.selectAll("g");
 		state.forEach(function(element){
@@ -90,12 +90,10 @@ function weborgan(){
 			element.click(function(){
 				if(farf.activeRockers.indexOf(rocker) > -1){
 					//rocker is active
-					console.log("deactivating " + rocker);
 					farf.deactivateRocker(rocker);
 					toggle = false;
 				}else{
 					//rocker is deactive
-					console.log("activating " + rocker);
 					farf.activateRocker(rocker);
 				}
 				state[0].toggleClass("hide", toggle);
@@ -114,7 +112,9 @@ function weborgan(){
             sysex: false
         }).then(onMIDISuccess, onMIDIFailure);
     } else {
-        alert("No MIDI support in your browser.");
+    	var selectMIDIIn=document.getElementById("midiIn");
+    	selectMIDIIn.options.length = 0;
+    	selectMIDIIn.add(new Option("No MIDI support in this broswer"))
     }
 
     // midi functions
@@ -146,12 +146,13 @@ function weborgan(){
     function onMIDIFailure(error) {
         // when we get a failed response, run this code
         console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + error);
+        var selectMIDIIn=document.getElementById("midiIn");
+    	selectMIDIIn.options.length = 0;
+    	selectMIDIIn.add(new Option("MIDI error:" + error))
     }
 
     function onMIDIMessage( ev ) {
         data = ev.data; // this gives us our [command/channel, note, velocity] data.
-        console.log('MIDI data', data); // MIDI data [144, 63, 73]
-
         var cmd = ev.data[0] >> 4;
         var channel = ev.data[0] & 0xf;
         var noteNumber = ev.data[1];
@@ -161,10 +162,8 @@ function weborgan(){
 
         // MIDI noteon with velocity=0 is the same as noteoff
         if ( cmd==8 || ((cmd==9)&&(velocity==0)) ) { // noteoff
-            console.log("note off: "+noteNumber);
         	farf.keyUp(midiNumber[noteNumber]);
         } else if (cmd == 9) { // note on
-            console.log("note on: "+noteNumber);
           	farf.keyDown(midiNumber[noteNumber]);
         } else if (cmd == 11) { // controller message
           //controller( noteNumber, velocity);
@@ -174,7 +173,19 @@ function weborgan(){
     }
 
 }
-
+weborgan.prototype.checkBrowser = function(){
+	var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+	var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+	var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+	var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
+	var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+	if(!isChrome){
+		$('#checkBrowser').addClass("alert alert-danger");
+		$('#checkBrowser').append("<h3>Alert: We reccomend using <a href='http://www.google.com/chrome/' target='_blank'>Google Chrome</a> for best results!</h3>");
+	}
+}
 
 
 var organ = new weborgan();
