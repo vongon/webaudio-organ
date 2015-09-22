@@ -174,7 +174,7 @@ farfisa.prototype.initialize = function(){
 
 	this.outputGain = this.context.createGain();
 	this.outputGain.connect(this.context.destination);
-	this.outputGain.value = this.outputGainLevel;
+	this.outputGain.gain.value = this.outputGainLevel;
 
 	for(rocker in this.rockers){
 		obj = this.rockers[rocker];
