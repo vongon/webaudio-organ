@@ -1,0 +1,26 @@
+{
+  "name": "farfisa",
+  "version": "1.0.0",
+  "description": "1960's Farfisa Fast 3 transistor organ emulated using Web Audio API",
+  "main": "lib/farfisa.js",
+  "scripts": {
+    "server": "http-server",
+    "dist": "browserify lib/farfisa.js > dist/farfisa.js&& browserify lib/farfisa.js | uglifyjs > dist/farfisa.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanjamesmcgill/webaudio-organ.git"
+  },
+  "keywords": [
+    "webaudio",
+    "organ",
+    "farfisa",
+    "midi"
+  ],
+  "author": "Ryan James McGill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanjamesmcgill/webaudio-organ/issues"
+  },
+  "homepage": "https://github.com/ryanjamesmcgill/webaudio-organ#readme"
+}

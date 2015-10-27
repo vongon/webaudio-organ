@@ -5,3 +5,23 @@ http://www.farfisaofthefuture.com/
 <a href="http://www.farfisaofthefuture.com/" target="_blank"><img alt="farfisaofthefutuer" src="https://cloud.githubusercontent.com/assets/6580936/10120354/7e5cd65e-647c-11e5-8e45-4fda9310ed0e.png"></a>
 
 View here: www.farfisaofthefuture.com
+
+## Install
+
+Via npm: `npm install --save farfisa` or get the `dist/farfisa.min.js` file from this repo.
+
+## Build distribution and run the demo
+
+To build distribution:
+
+1. Clone this repo
+2. Install npm
+3. Install browserify and uglifyjs: `npm install -g browserify uglifyjs`
+4. Run `dist` npm script: `npm run dist`
+
+To run the demo on local:
+
+1. Clone this repo
+2. Install npm
+3. Install http-server: `npm install -g http-server`
+4. Run `server` npm script: `npm run server`
